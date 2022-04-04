@@ -2,7 +2,7 @@
   "name": "hermione-allure-testops-reporter",
   "version": "1.0.0",
   "description": "Get allure results from hermione",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib"
   },
