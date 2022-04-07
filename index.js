@@ -1,11 +1,11 @@
 const AllureHermioneReporter = require('./lib/hermione-reporter')
-const updateRefs = require('./lib/readEnvs')
+const updateRefsCheck = require('./lib/updateRefsCheck')
 
 module.exports = function (hermione, opts) {
   // Check updateRefs argvs
-  const updateRefsData = updateRefs(process.argv)
+  const updateRefs = updateRefsCheck(process.argv)
 
-  if (!opts.enabled || updateRefsData) {
+  if (!opts.enabled || updateRefs) {
     return
   }
 
