@@ -20,7 +20,6 @@
   },
   "homepage": "https://github.com/Aero-Consulting/hermione-allure-testops-reporter#readme",
   "dependencies": {
-    "allure-js-commons": "^2.0.0-beta.15",
-    "crypto": "^1.0.1"
+    "allure-js-commons": "^2.0.0-beta.15"
   }
 }
