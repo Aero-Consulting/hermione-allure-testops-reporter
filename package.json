@@ -1,0 +1,25 @@
+{
+  "name": "hermione-allure-testops-reporter",
+  "version": "1.0.0",
+  "description": "Get allure results from hermione",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aero-Consulting/hermione-allure-testops-reporter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aero-Consulting/hermione-allure-testops-reporter/issues"
+  },
+  "homepage": "https://github.com/Aero-Consulting/hermione-allure-testops-reporter#readme",
+  "dependencies": {
+    "allure-js-commons": "^2.0.0-beta.15"
+  }
+}
