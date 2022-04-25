@@ -15,28 +15,30 @@ module.exports = function (hermione, opts) {
   }
 
   const allureReporter = new AllureHermioneReporter(allureConfig)
-
-  hermione.on(hermione.events.SUITE_BEGIN, function (suite) {
-    allureReporter.startSuite(suite.fullTitle())
-  })
+  let suits = []
+  let tests = []
 
   hermione.on(hermione.events.SUITE_END, function (suite) {
-    allureReporter.endSuite(suite)
-  })
-
-  hermione.on(hermione.events.TEST_BEGIN, function (test) {
-    allureReporter.startCase(test)
+    suits.push(suite)
+    // allureReporter.endSuite(suite)
   })
 
   hermione.on(hermione.events.TEST_PASS, function (test) {
-    allureReporter.passTestCase(test)
+    tests.push(test)
+    // allureReporter.passTestCase(test)
   })
 
   hermione.on(hermione.events.TEST_FAIL, function (test) {
-    allureReporter.failTestCase(test, test.err)
+    tests.push(test)
+    // allureReporter.failTestCase(test, test.err)
   })
 
   hermione.on(hermione.events.TEST_PENDING, function (test) {
-    allureReporter.pendingTestCase(test)
+    tests.push(test)
+    // allureReporter.pendingTestCase(test)
+  })
+
+  hermione.on(hermione.events.END, async function () {
+    await allureReporter.handleTests(tests)
   })
 }
