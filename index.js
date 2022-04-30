@@ -15,27 +15,17 @@ module.exports = function (hermione, opts) {
   }
 
   const allureReporter = new AllureHermioneReporter(allureConfig)
-  let tests = []
+  let promises = []
 
   hermione.on(hermione.events.TEST_END, function (test) {
-    tests.push(test)
+    //Remove retries exept last one
+    if (test.retriesLeft) return
+
+    promises.push(allureReporter.prepareTests(test))
   })
 
   hermione.on(hermione.events.RUNNER_END, async function () {
-    console.log(`There ${tests.length} test to handle!`)
-    if (tests.length === 0) {
-      return
-    }
-
-    let promises = []
-
-    //Remove retries exept last one
-    tests = tests.filter(testCase => !testCase?.retriesLeft)
-
-    for (const mochaTestCase of tests) {
-      promises.push(allureReporter.prepareTests(mochaTestCase))
-    }
-
+    // Wait untill all reports process (make diff picture take A LOT of time)
     await Promise.all(promises)
   })
 }
