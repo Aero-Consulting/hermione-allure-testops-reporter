@@ -22,6 +22,20 @@ module.exports = function (hermione, opts) {
   })
 
   hermione.on(hermione.events.RUNNER_END, async function () {
-    await allureReporter.handleAllTests(tests)
+    console.log(`There ${tests.length} test to handle!`)
+    if (tests.length === 0) {
+      return
+    }
+
+    let promises = []
+
+    //Remove retries exept last one
+    tests = tests.filter(testCase => !testCase?.retriesLeft)
+
+    for (const mochaTestCase of tests) {
+      promises.push(allureReporter.prepareTests(mochaTestCase))
+    }
+
+    await Promise.all(promises)
   })
 }
