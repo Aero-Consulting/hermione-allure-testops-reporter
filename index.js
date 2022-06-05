@@ -5,7 +5,7 @@ module.exports = function (hermione, opts) {
   // Check updateRefs argvs
   const updateRefsData = updateRefs(process.argv)
 
-  if (!opts.enabled || updateRefsData) {
+  if (!opts.enabled) {
     return
   }
 
